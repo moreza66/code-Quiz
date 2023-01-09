@@ -5,9 +5,9 @@ const startButton = document.getElementById("start-button");
 // Total questions in quiz
 const questionContainer = document.getElementById("question-container");
 // End Of Quiz
-const endScreen = document.getElementById("end-Screen");
+const endOfGameScreen = document.getElementById("end-of-game");
 //Score Detail
-const scoreScreen = document.getElementById("score-screen");
+const scoreScreen = document.getElementById("score-display");
 //High Score
 const highScores = document.getElementById("high-score");
 
@@ -16,18 +16,18 @@ const answerButtons = document.getElementById("answer-buttons");
 // Initials entered by user
 const initialList = document.getElementById("initials-list");
 // The number of high scores to be shown
-const highScoresList = document.getElementById("view-high-list");
-const listHighScoreEl = document.getElementById("high-score-list");
+const highScoresList = document.getElementById("display-high-list");
+const listHighScoreEl = document.getElementById("high-score-list-display");
 // The correct answer of current question
 const correctAnswer = document.getElementById("correct");
 // The wrong answer of current question
 const wrongAnswer = document.getElementById("wrong");
 //lets have fun!!
-const startGameBtn = document.querySelector("#start-game-btn");
+const startGameBtn = document.querySelector("#start-game-button");
 const backButton = document.querySelector("#go-back");
 //Clean the local storage
 const refreshButton = document.querySelector("#clear-high-scores");
-const timerScreen = document.querySelector("#timer");
+const timerDisplay = document.querySelector("#timer");
 
 // The score
 let score = 0; 
@@ -35,10 +35,10 @@ let score = 0;
 let timer;
 let gameover;
 // Time left for test
-timerScreen .innerText=0;
+timerDisplay.innerText=0;
 
 let HighScores = [];
-let questionsShuffle;
+let randomlyQuestions;
 let questionIndex = 0;
 
 // The array of questions for the quiz.
@@ -60,7 +60,7 @@ const questions = [
 
     {question: "What file need an alteration when we have a typo shown on website?",
     answer: "3. HTML",
-    choices: [{choice: "1. CSS"}, {choice: "2. cJavascript"}, {choice: "3. HTML"}, {choice: "4. JSON"}]
+    choices: [{choice: "1. CSS"}, {choice: "2. Javascript"}, {choice: "3. HTML"}, {choice: "4. JSON"}]
     },
 
     {question: "Which one of the following is able to use as a database to store data?",
@@ -76,20 +76,20 @@ const questions = [
 
  // Clear the CodingQuizChallenge Info page - Helper code to call the startQuiz()
   // Begin the quiz! Good luck!
-const setTime = function() {
-    timer = 60;
+const setTimer = function() {
+    timerCount = 60;
 //Initialize the display timer at default value
 let timercheck = setInterval(function() {
-    timerScreen .innerText = timer;
-    timer--
+    timerDisplay.innerText = timerCount;
+    timerCount--
 
     if (gameover) {
         clearInterval(timercheck)
     }
 
-    if (timer < 0) {
+    if (timerCount < 0) {
         showScore()
-        timerScreen .innerText = 0
+        timerDisplay.innerText = 0
         clearInterval(timercheck)
     }
 
@@ -104,15 +104,15 @@ let startGame = function() {
     questionContainer.classList.add("show");
 
    //Random questions
-    questionsShuffle = questions.sort(() => Math.random() - 0.5)
-    setTime()
+    randomlyQuestions = questions.sort(() => Math.random() - 0.5)
+    setTimer()
     setQuestion()
 }
 
 // This displays each question.
 let setQuestion = function() {
     resetAnswers()
-    displayQuestion(questionsShuffle[questionIndex])
+    displayQuestion(randomlyQuestions[questionIndex])
 }
 
 
@@ -144,7 +144,7 @@ let answerCorrect = function() {
     }
 }
 
-let answerWrong = function() {
+const answerWrong = function() {
     if (wrongAnswer.className = "hide") {
         wrongAnswer.classList.remove("hide")
         wrongAnswer.classList.add("banner")
@@ -153,20 +153,20 @@ let answerWrong = function() {
 }
 
 const answerCheck = function(event) {
-    let selectedAnswer = event.target 
-    if (questionsShuffle[questionIndex].answer === selectedAnswer.innerText) {
+    const selectedAnswer = event.target 
+    if (randomlyQuestions[questionIndex].answer === selectedAnswer.innerText) {
         answerCorrect()
         score = score + 10
     }
-// Time to be subtracted if user enters wrong answer to any question
+    // Time to be subtracted if user enters wrong answer to any question
     else {
         answerWrong()
         score = score - 5;
         timer = timer - 5;
     };
 
-questionIndex++
-    if (questionsShuffle.length > questionIndex + 1) {
+    questionIndex++
+    if (randomlyQuestions.length > questionIndex + 1) {
         setQuestion()
     }
     else {
@@ -177,11 +177,11 @@ questionIndex++
 
 const showScore = function() {
     questionContainer.classList.add("hide");
-    endScreen.classList.remove("hide");
-    endScreen.classList.add("show");
+    endOfGameScreen.classList.remove("hide");
+    endOfGameScreen.classList.add("show");
 
     const scoreDisplay = document.createElement("p")
-    scoreDisplay.innerText = ("Your final score is " + score + ".");
+    scoreDisplay.innerText = (`Your final score is ${score}.`);
     scoreScreen.appendChild(scoreDisplay);
 }
 
@@ -190,7 +190,7 @@ const createHighScore = function(event) {
     event.preventDefault()
     let initials = document.querySelector("#initials").value;
     if (!initials) {
-        alert("You must  enter your initials.");
+        alert("You must enter your initials.");
         return;
     }
 
@@ -202,7 +202,7 @@ const createHighScore = function(event) {
     }
 
     HighScores.push(HighScore);
-    HighScores.sort((a, b) => {return b.score-a.score});
+    HighScores.sort((a, b) => {return b.score - a.score});
 
 while (listHighScoreEl.firstChild) {
     listHighScoreEl.removeChild(listHighScoreEl.firstChild)
@@ -232,7 +232,7 @@ const loadHighScore  = function() {
     }
 
     loadedHighScores = JSON.parse(loadedHighScores);
-    loadedHighScores.sort((a,b) => {return b.score-a.score})
+    loadedHighScores.sort((a,b) => {return b.score - a.score})
 
     for (let i = 0; i < loadedHighScores.length; i++) {
         let highscoreEl = document.createElement("li");
@@ -251,9 +251,9 @@ const displayHighScores = function() {
     highScores.classList.add("show");
     gameover = "true"
 
-    if (endScreen.className = "show") {
-        endScreen.classList.remove("show");
-        endScreen.classList.add("hide");
+    if (endOfGameScreen.className = "show") {
+        endOfGameScreen.classList.remove("show");
+        endOfGameScreen.classList.add("hide");
     }
 
     if (startButton.className = "show") {
@@ -286,7 +286,7 @@ const renderStartPage = function() {
     scoreScreen.removeChild(scoreScreen.lastChild)
     questionIndex = 0
     gameover = ""
-    timerScreen .textContent = 0;
+    timerDisplay.textContent = 0;
     score = 0
 
     if (correctAnswer.className = "show") {
