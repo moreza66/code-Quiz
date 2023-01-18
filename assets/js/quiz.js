@@ -9,7 +9,14 @@ let HighScores = [];
 let randomlyQuestions;
 let questionIndex = 0;
  
+const startButton = document.getElementById("start-button");
+const questionContainer = document.getElementById("question-container");
+const choices = document.getElementById("")
 
+startButton.addEventListener('click', startGame)
+function startGame() {
+    console.log('started')
+}
 
 //Question and answers
 const questions = [
@@ -67,8 +74,6 @@ const questions = [
         4: "Hyper Text Markup Leveler"}
     },
 ];
-
-
 
 
 
