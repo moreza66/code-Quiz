@@ -1,21 +1,39 @@
-const stopWatch = document.querySelector("#timer");
 
+
+
+const showTimer = document.querySelector("#timer");
 
 let score = 0; 
 let timer;
 let gameover;
-stopWatch.innerText=0;
+showTimer.innerText= 0;
 let HighScores = [];
 let randomlyQuestions;
 let questionIndex = 0;
  
 const startButton = document.getElementById("start-button");
+
+//hide and show question container 
 const questionContainer = document.getElementById("question-container");
+
+//display question
+const displayQuestion = document.getElementById('question-content')
+//Display choises 
+var choiceOne = document.getElementById("btn1");
+var choiceTwo = document.getElementById("btn2");
+var choiceThree = document.getElementById("btn3");
+var choiceFourth = document.getElementById("btn4");
+const answerButtons = document.getElementById("answer-buttons");
 const choices = document.getElementById("")
 
 startButton.addEventListener('click', startGame)
 function startGame() {
     console.log('started')
+    setTimer(60);
+    startButton.classList.add('hide')
+    questionContainer.classList.remove('hide')
+    currentQuestionIndex = 0
+    setNextQuestion()
 }
 
 //Question and answers
@@ -75,16 +93,30 @@ const questions = [
     },
 ];
 
+const setNextQuestion = () => { 
+    showQuestion()
+}
+const showQuestion = () => {
+    for(let i=0; i<= questions.length; i++) {
+        displayQuestion.innerText = questions[i].question;
+        choiceOne.innerText = questions[i].choices[1]
+        choiceTwo.innerText = questions[i].choices[2]
+        choiceThree.innerText = questions[i].choices[3]
+        choiceFourth.innerText = questions[i].choices[4]
+   
+    }
+}
 
 
 
 
-const setTimer = function(duration) {
+const setTimer = (duration) => {
     let timer = duration;
     let gameover = false;
 
     let interval = setInterval(function() {
         timer--;
+        showTimer.innerText= timer;
         console.log(timer);
 
         if (timer <= 0) {
@@ -95,4 +127,3 @@ const setTimer = function(duration) {
     }, 1000);
 }
 
-setTimer(60); // starts a 60-second timer
