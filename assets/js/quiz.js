@@ -1,3 +1,17 @@
+const stopWatch = document.querySelector("#timer");
+
+
+let score = 0; 
+let timer;
+let gameover;
+stopWatch.innerText=0;
+let HighScores = [];
+let randomlyQuestions;
+let questionIndex = 0;
+ 
+
+
+//Question and answers
 const questions = [
     {question: "Which one of the following is used to save the style of a webpage?",
     answer: "2. CSS",
@@ -53,3 +67,27 @@ const questions = [
         4: "Hyper Text Markup Leveler"}
     },
 ];
+
+
+
+
+
+
+
+const setTimer = function(duration) {
+    let timer = duration;
+    let gameover = false;
+
+    let interval = setInterval(function() {
+        timer--;
+        console.log(timer);
+
+        if (timer <= 0) {
+            gameover = true;
+            clearInterval(interval);
+            console.log("Game Over");
+        }
+    }, 1000);
+}
+
+setTimer(60); // starts a 60-second timer
