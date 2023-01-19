@@ -15,8 +15,6 @@ An application that allows a student to take a timed quiz on Javascript fundamen
 ### Glance of the app:
 
 ![](./assets/images/image%201.jpg)
-![](./assets/images/image%202.jpg)
-![](./assets/images/image%203.jpg)
 
 ## Questions
 
