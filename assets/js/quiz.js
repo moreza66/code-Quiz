@@ -190,3 +190,15 @@ const checkAnswer = (ans) => {
             i++
           });
       };
+      
+      setTimer(config.defaultTime);
+addScore(config.defaultScore);
+reloadHighScores()
+document.getElementById("startGame").onclick = () => {
+  document.getElementsByClassName("start")[0].classList.add("hide");
+  document.getElementsByClassName("questions")[0].classList.remove("hide");
+  setQuestion();
+  startTimer();
+};
+
+      
