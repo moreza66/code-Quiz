@@ -164,3 +164,6 @@ const checkAnswer = (ans) => {
         scores.push([name, score]);
         localStorage.setItem("scores", JSON.stringify(scores));
       };
+
+      //clear the scores from the browser's local storage
+      const clearStorage = () => localStorage.removeItem("scores");
