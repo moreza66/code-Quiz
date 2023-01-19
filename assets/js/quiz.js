@@ -128,3 +128,25 @@ const checkAnswer = (ans) => {
         setQuestion();
       }, 500);
     };
+
+
+    // set the next question in a quiz
+    const setQuestion = () => {
+        if (currentQuestion >= config.totalQuestion) {
+          stopTimer();
+          return;
+        }
+        document.getElementsByClassName("question")[0].textContent =
+          questions[currentQuestion].question;
+        document.getElementsByClassName("answers")[0].textContent = "";
+        questions[currentQuestion].answers
+          .sort((a, b) => 0.5 - Math.random())
+          .forEach((answer) => {
+            const ans = document.createElement("div");
+            ans.innerHTML = answer[0];
+            ans.setAttribute("data-correct", answer[1] ? "1" : "0");
+            ans.setAttribute("onclick", "checkAnswer(this)");
+            document.getElementsByClassName("answers")[0].append(ans);
+          });
+        currentQuestion++;
+      };
