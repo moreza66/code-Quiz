@@ -150,3 +150,10 @@ const checkAnswer = (ans) => {
           });
         currentQuestion++;
       };
+
+      // retrieve stored scores from the browser's local storage
+      const restoreScores = () => {
+        const scores = localStorage.getItem("scores");
+        if (scores) return JSON.parse(scores);
+        return [];
+      };
