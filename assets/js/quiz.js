@@ -191,14 +191,36 @@ const checkAnswer = (ans) => {
           });
       };
       
+      //loaded and sets up the game
       setTimer(config.defaultTime);
-addScore(config.defaultScore);
-reloadHighScores()
-document.getElementById("startGame").onclick = () => {
-  document.getElementsByClassName("start")[0].classList.add("hide");
-  document.getElementsByClassName("questions")[0].classList.remove("hide");
-  setQuestion();
-  startTimer();
-};
+      addScore(config.defaultScore);
+        reloadHighScores()
+      document.getElementById("startGame").onclick = () => {
+      document.getElementsByClassName("start")[0].classList.add("hide");
+      document.getElementsByClassName("questions")[0].classList.remove("hide");
+      setQuestion();
+      startTimer();
+      };
+
+
+      //sets up event listeners for three buttons: "saveScore", "clearStorage", and "refreshPage".
+      document.getElementById("saveScore").onclick = () => {
+        let name = document.getElementById("name")
+        if( name.value == "" ){
+          alert("Please set name")
+          return;
+        }
+        addToStorage( name.value, currentScore )
+        document.getElementsByClassName("addScore")[0].classList.add("hide");
+        document.getElementsByClassName("scores")[0].classList.remove("hide");
+        reloadHighScores()
+      }
+      document.getElementById("clearStorage").onclick = () => {
+        clearStorage();
+        reloadHighScores();
+      }
+      document.getElementById("refreshPage").onclick = () => location.reload();
+
+    
 
       
