@@ -22,9 +22,9 @@ const questions = [
 
     {question: "Which of the following is not a CSS library?",
     answers: [
-        ["Tailwind", false]
-        ["bootstrap", false] 
-        ["materialise", false]
+        ["Tailwind", false],
+        ["bootstrap", false],
+        ["materialise", false],
         ["jQuery",true],
     ],
     },
