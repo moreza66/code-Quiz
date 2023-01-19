@@ -80,3 +80,7 @@ const secondsFormat = (t) => {
   return `${minutes}:${seconds}`;
 };
 
+const setTimer = (seconds) => {
+    document.getElementById("timer").textContent = secondsFormat(seconds);
+  };
+
