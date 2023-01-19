@@ -95,3 +95,12 @@ const setTimer = (seconds) => {
     }, 1000);
   };
 
+  const stopTimer = () => {
+    clearInterval(_timer);
+    setTimeout(() => {
+      document.getElementsByClassName("questions")[0].classList.add("hide");
+      document.getElementsByClassName("addScore")[0].classList.remove("hide");
+      document.getElementsByClassName("finalScore")[0].textContent = currentScore
+    }, 2000);
+  };
+
