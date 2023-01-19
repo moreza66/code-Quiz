@@ -112,3 +112,19 @@ const addScore = (score) => {
   setScore(currentScore);
 };
 
+const checkAnswer = (ans) => {
+    if (currentTimer <= 0) return stopTimer();
+    if (ans.getAttribute("data-correct") === "1") {
+      ans.classList.add("ansCorrect");
+      addScore(config.scoreForAnswer);
+    } else {
+      ans.classList.add("ansWrong");
+      document
+        .querySelector("div.questions div.answers div[data-correct='1']")
+        .classList.add("ansCorrect");
+      currentTimer -= config.wrongAnswer;
+    }
+    setTimeout(() => {
+        setQuestion();
+      }, 500);
+    };
