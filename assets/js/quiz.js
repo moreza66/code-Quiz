@@ -65,38 +65,18 @@ const questions = [
         ],
       },
 ];
+let currentTimer = config.defaultTime;
+let currentScore = config.defaultScore;
+let currentQuestion = 0;
+let _timer = null;
 
-const setNextQuestion = () => { 
-    showQuestion()
-}
-const showQuestion = () => {
-    for(let i=0; i<= questions.length; i++) {
-        displayQuestion.innerText = questions[i].question;
-        choiceOne.innerText = questions[i].choices[1]
-        choiceTwo.innerText = questions[i].choices[2]
-        choiceThree.innerText = questions[i].choices[3]
-        choiceFourth.innerText = questions[i].choices[4]
-   
-    }
-}
-
-
-
-
-const setTimer = (duration) => {
-    let timer = duration;
-    let gameover = false;
-
-    let interval = setInterval(function() {
-        timer--;
-        showTimer.innerText= timer;
-        console.log(timer);
-
-        if (timer <= 0) {
-            gameover = true;
-            clearInterval(interval);
-            console.log("Game Over");
-        }
-    }, 1000);
-}
+const secondsFormat = (t) => {
+  let minutes = 0,
+    seconds = 0;
+  minutes = parseInt(t / 60)
+    .toString()
+    .padStart(2, "0");
+  seconds = (t - parseInt(t / 60) * 60).toString().padStart(2, "0");
+  return `${minutes}:${seconds}`;
+};
 
