@@ -84,3 +84,14 @@ const setTimer = (seconds) => {
     document.getElementById("timer").textContent = secondsFormat(seconds);
   };
 
+  const startTimer = () => {
+    _timer = setInterval(() => {
+      if (currentTimer <= 0) {
+        stopTimer();
+      } else {
+        currentTimer--;
+        setTimer(currentTimer);
+      }
+    }, 1000);
+  };
+
