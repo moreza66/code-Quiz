@@ -157,3 +157,10 @@ const checkAnswer = (ans) => {
         if (scores) return JSON.parse(scores);
         return [];
       };
+
+      //add new scores to the browser's local storage
+      const addToStorage = (name, score) => {
+        const scores = restoreScores();
+        scores.push([name, score]);
+        localStorage.setItem("scores", JSON.stringify(scores));
+      };
