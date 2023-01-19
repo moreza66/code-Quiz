@@ -167,3 +167,26 @@ const checkAnswer = (ans) => {
 
       //clear the scores from the browser's local storage
       const clearStorage = () => localStorage.removeItem("scores");
+
+      //reload the high scores table on the page with the most recent scores from the browser's local storage.
+      const reloadHighScores = () => {
+        const scores = restoreScores();
+        document.querySelector("table#highScores tbody").innerHTML = ""
+        let i = 1;
+        scores
+          .sort((a, b) => b[1] - a[1])
+          .forEach((item) => {
+            const tr = document.createElement("tr")
+            const ref = document.createElement("td")
+            ref.innerHTML = i
+            tr.appendChild(ref);
+            const name = document.createElement("td")
+            name.innerHTML = item[0]
+            tr.appendChild(name);
+            const score = document.createElement("td")
+            score.innerHTML = item[1]
+            tr.appendChild(score);
+            document.querySelector("table#highScores tbody").append(tr);
+            i++
+          });
+      };
