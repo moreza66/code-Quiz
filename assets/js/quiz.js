@@ -104,3 +104,11 @@ const setTimer = (seconds) => {
     }, 2000);
   };
 
+  //This code defines two functions: setScore and addScore
+  const setScore = (score) =>
+  document.getElementById("score").textContent = score;
+const addScore = (score) => {
+  currentScore += score;
+  setScore(currentScore);
+};
+
